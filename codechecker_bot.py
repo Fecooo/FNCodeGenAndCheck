@@ -2,9 +2,12 @@ from selenium import webdriver
 import time
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 
-PATH = "C:\Program Files (x86)\chromedriver.exe"
-driver = webdriver.Chrome(PATH)
+s = Service("C:\Program Files (x86)\chromedriver.exe")
+"""PATH = "C:\Program Files (x86)\chromedriver.exe"""
+driver = webdriver.Chrome(service=s)
+driver.maximize_window()
 
 driver.get('https://nitestats.com/codes-checker')
 time.sleep(0.5)
