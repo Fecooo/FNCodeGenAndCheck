@@ -20,8 +20,10 @@ Egy program (bot), ami véletlenszerű Fortnite kódokat generál és megvizsgá
   * Nem.
 * Van rá esély, hogy szerezzek valós kódot?
   * Minimális, de van.
+* Mennyi idő a folymat?
+  * 10000 kód megvizsgálása nagyjából 23 perc.
 * Milyen Fortnite kódokat lehet vele szerezni?
-  * Bármilyen jelenleg is érvényes, Epic Games-nél beaktiválható kódot (pl. DC vagy wrap kódok)
+  * Bármilyen jelenleg is érvényes, Epic Games-nél beaktiválható kódot (pl. DC kódok)
 * Hozzájárult:
   * Kiwii - Kód Generátor
   * VastBlast - Kód Vizsgáló
