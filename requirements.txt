@@ -1,3 +1,5 @@
-requests
 selenium
 dhooks
+colorama
+colored
+time

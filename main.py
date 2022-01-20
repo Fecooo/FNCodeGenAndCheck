@@ -2,42 +2,69 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+from colorama import Fore
+from colored import fg
 from dhooks import Webhook
 import time
 
-tim = time.localtime()
-current_time = time.strftime("%H:%M:%S", tim)
-"""print(current_time)"""
-
-
+"""tim = time.localtime()
+current_time = time.strftime("%H:%M:%S", tim)"""
+zold=fg('green')
+# kérdések blokk
 s = Service("C:\Program Files (x86)\chromedriver.exe")
 
-print(current_time, "- A bot képes Discord webhook-al üzenetet küldeni az eredményekről")
-print("Szeretnéd használni ezt a funkciót?")
-print("igen")
-print("nem")
-valasz = input("Választásod: ")
-print(".")
-print("Hányszor tízezer kódot akarsz megvizsgáltatni?")
-darabszam = int(input("Döntésed: "))
+print("")
+print(Fore.WHITE + " --> " + Fore.GREEN + "Mekkora adag kódokat szeretnél vizsgáltatni? (Minél nagyobb mennyiség annál lassabb lesz egy idő után)")
+print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "1 " + Fore.GREEN + "- 2500 " + Fore.LIGHTRED_EX + "(kb. 6 perc)")
+print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "2 " + Fore.GREEN + "- 5000 " + Fore.LIGHTRED_EX + "(kb. 11 perc)")
+print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "3 " + Fore.GREEN + "- 7500 " + Fore.LIGHTRED_EX + "(kb. 17 perc)")
+print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "4 " + Fore.GREEN + "- 10000 " + Fore.LIGHTRED_EX + "(kb. 22 perc)")
+adag = int(input(Fore.WHITE + " --> " + Fore.GREEN + "Adag: " + Fore.LIGHTBLUE_EX + ""))
 
-if valasz == "igen":
-    webhook = input("Add meg a DC webhook linkjét: ")
+ismetles = 0
+if adag == 1:
+    ismetles = 4
+elif adag == 2:
+    ismetles = 9
+elif adag == 3:
+    ismetles = 14
+elif adag == 4:
+    ismetles = 19
+else:
+    print(Fore.RED + "Na fussunk neki mégegyszer.")
+
+print("")
+print(Fore.WHITE + " --> " + Fore.GREEN + "Hányszor vizsgálnád ezt az adagot?")
+vizsgalas = int(input(Fore.WHITE + " --> " + Fore.GREEN + "Vizsgálás száma: " + Fore.LIGHTBLUE_EX + ""))
+
+print("")
+print(Fore.WHITE + " --> " + Fore.GREEN + "A bot képes Discord webhook-al üzenetet küldeni az eredményekről")
+print(Fore.WHITE + " --> " + Fore.GREEN + "Szeretnéd használni ezt a funkciót? " + Fore.LIGHTBLUE_EX + "(i / n)")
+valasz = input(Fore.WHITE + " --> " + Fore.GREEN + "Választásod: " + Fore.LIGHTBLUE_EX + "")
+print("")
+
+if valasz == "i":
+    webhook = input(Fore.WHITE + " --> " + Fore.GREEN + "Add meg a DC webhook linkjét: " + Fore.LIGHTBLUE_EX + "")
     hook = Webhook(webhook)
-    time.sleep(2)
-    print("A bot munkára indul!")
     time.sleep(0.5)
-    driver = webdriver.Chrome(service=s)
+
+    print(Fore.WHITE + " --> " + Fore.RED + "A bot munkára indul!" + Fore.WHITE + "")
+    time.sleep(0.5)
+
+    driver = webdriver.Chrome("C:\Program Files (x86)\chromedriver.exe")
     driver.maximize_window()
-elif valasz == "nem":
-    print("Nem igényelted ezt a funkciót. A bot munkára indul!")
+elif valasz == "n":
+    print(Fore.WHITE + " --> " + Fore.GREEN + "Nem igényelted ezt a funkciót. " + Fore.RED + "A bot munkára indul!" + Fore.WHITE + "")
     time.sleep(0.5)
-    driver = webdriver.Chrome(service=s)
+    
+    driver = webdriver.Chrome("C:\Program Files (x86)\chromedriver.exe")
     driver.maximize_window()
 else:
-    print("Nem tudom értelmezni")
+    print(Fore.WHITE + " --> " + Fore.RED + "Nem tudom értelmezni")
 
-if valasz == "igen" or valasz == "nem":
+# automata vizsgálás blokk
+if valasz == "i" or valasz == "n":
+    idokezdet = time.time()
     driver.get('https://nitestats.com/codes-checker')
     time.sleep(0.5)
 
@@ -49,7 +76,7 @@ if valasz == "igen" or valasz == "nem":
     driver.get(new_url)
     time.sleep(0.5)
 
-    for i in range(darabszam):
+    for i in range(vizsgalas):
         def program():
             driver.switch_to.window(driver.window_handles[0])
 
@@ -77,7 +104,7 @@ if valasz == "igen" or valasz == "nem":
             start.click()
             time.sleep(65)
 
-            for j in range(19):
+            for j in range(ismetles):
                 driver.switch_to.window(driver.window_handles[0])
 
                 driver.switch_to.window(driver.window_handles[1])
@@ -109,20 +136,23 @@ if valasz == "igen" or valasz == "nem":
             used = driver.find_element(By.XPATH, '//*[@id="inactiveData"]')
             error = driver.find_element(By.XPATH, '//*[@id="errorData"]')
             
-            if valasz == "igen":
-                print("Érvényes kódok száma: ", validsz.text)
-                print("Használt kódok száma: ", used.text)
-                print("Hibás kódok száma: ", error.text)
+            if valasz == "i":
+                print("")
+                print(Fore.WHITE + " --> " + Fore.LIGHTGREEN_EX + "Érvényes kódok száma: " + Fore.CYAN + validsz.text)
+                print(Fore.WHITE + " --> " + Fore.LIGHTYELLOW_EX + "Használt kódok száma: " + Fore.CYAN + used.text)
+                print(Fore.WHITE + " --> " + Fore.LIGHTRED_EX + "Hibás kódok száma: " + Fore.CYAN + error.text)
 
                 hook.send("Érvényes kódok száma: " + "**" + validsz.text + "**")
                 hook.send("Használt kódok száma: " + "**" + used.text + "**")
                 hook.send("Hibás kódok száma: " + "**" + error.text + "**")
-            elif valasz == "nem":
-                print("Érvényes kódok száma: ", validsz.text)
-                print("Használt kódok száma: ", used.text)
-                print("Hibás kódok száma: ", error.text)
+            elif valasz == "n":
+                print("")
+                print(Fore.WHITE + " --> " + Fore.LIGHTGREEN_EX + "Érvényes kódok száma: " + Fore.CYAN + validsz.text)
+                print(Fore.WHITE + " --> " + Fore.LIGHTYELLOW_EX + "Használt kódok száma: " + Fore.CYAN + used.text)
+                print(Fore.WHITE + " --> " + Fore.LIGHTRED_EX + "Hibás kódok száma: " + Fore.CYAN + error.text)
             else:
-                print("Valami hiba történt.")
+                print("")
+                print(Fore.WHITE + " --> " + Fore.RED + "Valami hiba történt.")
 
             if validsz.text == "1" or validsz.text == "2" or validsz.text == "3":
                 copy = driver.find_element(By.XPATH, '//*[@id="copy-valid"]')
@@ -145,18 +175,20 @@ if valasz == "igen" or valasz == "nem":
                 validkod = driver.find_element(By.XPATH, '//*[@id="panel"]/div')
                 time.sleep(3)
 
-                if valasz == "igen":
-                    print("Érvényes kód: ", validkod.text)
+                if valasz == "i":
+                    print("")
+                    print(Fore.WHITE + " --> " + Fore.LIGHTGREEN_EX + "Érvényes kód: " + Fore.CYAN + validkod.text + Fore.BLUE + "")
                     hook.send("Érvényes kód: " + validkod.text)
-                elif valasz == "nem":
-                    print("Érvényes kód: ", validkod.text)
-                else:
-                    print("Sajnos nem találtam érvényes kódot. 🙁")
-            else:
-                print("Sajnos nem találtam érvényes kódot. 🙁")
+                elif valasz == "n":
+                    print(Fore.WHITE + " --> " + Fore.LIGHTGREEN_EX + "Érvényes kód: " + Fore.CYAN + validkod.text + Fore.BLUE + "")
             driver.switch_to.window(driver.window_handles[0])
             driver.refresh()
-            time.sleep(10)
+            time.sleep(2)
         program()
+
+        idoveg = time.time()
+        ido = (idoveg-idokezdet-5)/60
+        print("")
+        print(Fore.WHITE + " --> " + Fore.GREEN + "A folyamat hossza: " + Fore.LIGHTBLUE_EX + "{0:.2f} perc".format(ido) + Fore.WHITE + "")
 else:
-    print("A bot nem indul el, mert nem adtál meg helyes adatot")
+    print(Fore.WHITE + "--> " + Fore.RED + "A bot nem indul el, mert nem adtál meg helyes adatot")
