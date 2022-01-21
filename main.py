@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from colorama import Fore
 from colored import fg
 from dhooks import Webhook
@@ -11,7 +11,10 @@ import time
 current_time = time.strftime("%H:%M:%S", tim)"""
 zold=fg('green')
 # kérdések blokk
-s = Service("C:\Program Files (x86)\chromedriver.exe")
+PATH = "C:\Program Files (x86)\chromedriver.exe"
+
+options = Options()
+options.add_argument('--log-level=3')
 
 print("")
 print(Fore.WHITE + " --> " + Fore.GREEN + "Mekkora adag kódokat szeretnél vizsgáltatni? (Minél nagyobb mennyiség annál lassabb lesz egy idő után)")
@@ -51,14 +54,24 @@ if valasz == "i":
     print(Fore.WHITE + " --> " + Fore.RED + "A bot munkára indul!" + Fore.WHITE + "")
     time.sleep(0.5)
 
-    driver = webdriver.Chrome("C:\Program Files (x86)\chromedriver.exe")
+    print("")
+    print("= " * 50)
+    driver = webdriver.Chrome(options=options, executable_path=PATH)
     driver.maximize_window()
+    time.sleep(2)
+    print("")
+    print("= " * 50)
 elif valasz == "n":
     print(Fore.WHITE + " --> " + Fore.GREEN + "Nem igényelted ezt a funkciót. " + Fore.RED + "A bot munkára indul!" + Fore.WHITE + "")
     time.sleep(0.5)
     
-    driver = webdriver.Chrome("C:\Program Files (x86)\chromedriver.exe")
+    print("")
+    print("= " * 50)
+    driver = webdriver.Chrome(options=options, executable_path=PATH)
     driver.maximize_window()
+    time.sleep(2)
+    print("")
+    print("= " * 50)
 else:
     print(Fore.WHITE + " --> " + Fore.RED + "Nem tudom értelmezni")
 
@@ -187,8 +200,14 @@ if valasz == "i" or valasz == "n":
         program()
 
         idoveg = time.time()
-        ido = (idoveg-idokezdet-5)/60
+        temp = idoveg-idokezdet-5
+
+        hours = temp // 3600
+        temp = temp - 3600*hours
+        minutes = temp//60
+        seconds = temp - 60*minutes
+
         print("")
-        print(Fore.WHITE + " --> " + Fore.GREEN + "A folyamat hossza: " + Fore.LIGHTBLUE_EX + "{0:.2f} perc".format(ido) + Fore.WHITE + "")
+        print(Fore.WHITE + " --> " + Fore.GREEN + "A folyamat hossza: " + Fore.LIGHTBLUE_EX + '%d:%d:%d' %(hours,minutes,seconds) + Fore.WHITE + "")
 else:
     print(Fore.WHITE + "--> " + Fore.RED + "A bot nem indul el, mert nem adtál meg helyes adatot")
