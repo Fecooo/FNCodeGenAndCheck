@@ -10,8 +10,8 @@ Egy program (bot), ami véletlenszerű Fortnite kódokat generál és megvizsgá
   <li>A mappában található `chromedriver.exe` fájlt helyezd át a `C:\Program Files (x86)` mappába</li>
   <li>Töltsd le a Pythont <a href="https://www.python.org/ftp/python/3.10.0/python-3.10.0.exe">innen</a>, ha neked már le van töltve, ezt a lépést kihagyhatod.</li>
   <li>Indítsd el a mappában található `intstall.bat` fájlt, ha elvégezte a telepítést, zárd be az ablakot.</li>
-  <li>A `start.bat` elindítása után, add meg a szükséges adatokat, majd reménykedj, hogy találsz jó kódot./li>
-  <li>Ne kattints semmire (csak akkor, ha a megvizsgált kódok száma eléri a 10000-ret)</li>
+  <li>A `start.bat` elindítása után, add meg a szükséges adatokat, majd reménykedj, hogy találsz jó kódot.</li>
+  <li>Ne kattints semmire, amíg a megvizsgált adatok száma el nem érte az általad megadottakat</li>
 </ol>
 
 
