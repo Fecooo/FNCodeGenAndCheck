@@ -4,7 +4,6 @@
 Egy program (bot), ami véletlenszerű Fortnite kódokat generál és megvizsgálja, hogy valós e.
 
 ## Telepítés
-
 <ol>
   <li>Töltsd le a repositoryban található állományokat</li>
   <li>A mappában található `chromedriver.exe` fájlt helyezd át a `C:\Program Files (x86)` mappába</li>
@@ -14,6 +13,12 @@ Egy program (bot), ami véletlenszerű Fortnite kódokat generál és megvizsgá
   <li>Ne kattints semmire, amíg a megvizsgált adatok száma el nem érte az általad megadottakat</li>
 </ol>
 
+## Instrukciók a Chromedriverhez
+<ul>
+  <li>A Chrome böngésződben kattints a jobb felső sarokban a három pöttyre > súgó > A Google Chrome névjegye.</li>
+  <li>Ezen az oldalon a verziószámra lesz szükség.</li>
+  <li>A verzió alapján, <a href="https://chromedriver.chromium.org/downloads">innen</a> töltsd le az ahhoz illőt. Az első szám a lényeg csak. (pl.: 97, 98, stb)</li>
+</ul>
 
 ## Általános Információk
 * Tartalmaz kártékony szoftvert?
