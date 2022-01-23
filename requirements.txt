@@ -2,4 +2,3 @@ selenium
 dhooks
 colorama
 colored
-time

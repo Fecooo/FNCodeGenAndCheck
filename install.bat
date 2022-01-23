@@ -1,4 +1,4 @@
 @echo off
 :: Install package
-pip install -r requirements.txt
+pip3 install requirements.txt
 pause

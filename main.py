@@ -93,6 +93,10 @@ if valasz == "i" or valasz == "n":
         def program():
             driver.switch_to.window(driver.window_handles[0])
 
+            for k in range(3):
+                le = driver.find_element(By.TAG_NAME, 'html')
+                le.send_keys(Keys.ARROW_DOWN)
+            
             sebesseg = driver.find_element(By.XPATH, '//*[@id="tab-1"]/div[1]/div[2]/div/div/div/div[2]/div/button[3]')
             sebesseg.click()
             time.sleep(0.5)
@@ -203,11 +207,11 @@ if valasz == "i" or valasz == "n":
         temp = idoveg-idokezdet-5
 
         hours = temp // 3600
-        temp = temp - 3600*hours
-        minutes = temp//60
-        seconds = temp - 60*minutes
+        temp = temp - 3600 * hours
+        minutes = temp // 60
+        seconds = temp - 60 * minutes
 
         print("")
-        print(Fore.WHITE + " --> " + Fore.GREEN + "A folyamat hossza: " + Fore.LIGHTBLUE_EX + '%d:%d:%d' %(hours,minutes,seconds) + Fore.WHITE + "")
+        print(Fore.WHITE + " --> " + Fore.GREEN + "A folyamat hossza: " + Fore.LIGHTBLUE_EX + '%02d:%02d:%02d' %(hours, minutes, seconds) + Fore.WHITE + "")
 else:
-    print(Fore.WHITE + "--> " + Fore.RED + "A bot nem indul el, mert nem adtál meg helyes adatot")
+    print(Fore.WHITE + " --> " + Fore.RED + "A bot nem indul el, mert nem adtál meg helyes adatot")
