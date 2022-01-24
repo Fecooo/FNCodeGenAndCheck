@@ -16,12 +16,20 @@ PATH = "C:\Program Files (x86)\chromedriver.exe"
 options = Options()
 options.add_argument('--log-level=3')
 
+def varakozas():
+    while True:
+        val = driver.find_element(By.CSS_SELECTOR, '#codesForm').get_attribute("value")
+        if val != '':
+            time.sleep(0.5)
+        else:
+            break
+
 print("")
 print(Fore.WHITE + " --> " + Fore.GREEN + "Mekkora adag kódokat szeretnél vizsgáltatni? (Minél nagyobb mennyiség annál lassabb lesz egy idő után)")
-print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "1 " + Fore.GREEN + "- 2500 " + Fore.LIGHTRED_EX + "(kb. 6 perc)")
-print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "2 " + Fore.GREEN + "- 5000 " + Fore.LIGHTRED_EX + "(kb. 11 perc)")
-print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "3 " + Fore.GREEN + "- 7500 " + Fore.LIGHTRED_EX + "(kb. 17 perc)")
-print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "4 " + Fore.GREEN + "- 10000 " + Fore.LIGHTRED_EX + "(kb. 22 perc)")
+print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "1 " + Fore.GREEN + "- 2500 " + Fore.LIGHTRED_EX + "(kb. 4 perc)")
+print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "2 " + Fore.GREEN + "- 5000 " + Fore.LIGHTRED_EX + "(kb. 7 perc)")
+print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "3 " + Fore.GREEN + "- 7500 " + Fore.LIGHTRED_EX + "(kb. 11 perc)")
+print(Fore.WHITE + " --> " + Fore.LIGHTBLUE_EX + "4 " + Fore.GREEN + "- 10000 " + Fore.LIGHTRED_EX + "(kb. 15 perc)")
 adag = int(input(Fore.WHITE + " --> " + Fore.GREEN + "Adag: " + Fore.LIGHTBLUE_EX + ""))
 
 ismetles = 0
@@ -93,13 +101,12 @@ if valasz == "i" or valasz == "n":
         def program():
             driver.switch_to.window(driver.window_handles[0])
 
-            for k in range(3):
-                le = driver.find_element(By.TAG_NAME, 'html')
-                le.send_keys(Keys.ARROW_DOWN)
-            
+            driver.execute_script("window.scrollBy(0,400)", "")
+
             sebesseg = driver.find_element(By.XPATH, '//*[@id="tab-1"]/div[1]/div[2]/div/div/div/div[2]/div/button[3]')
             sebesseg.click()
-            time.sleep(0.5)
+
+            driver.execute_script("window.scrollBy(0,-400)", "")
 
             driver.switch_to.window(driver.window_handles[1])
 
@@ -109,7 +116,7 @@ if valasz == "i" or valasz == "n":
 
             generate = driver.find_element(By.XPATH, '//*[@id="generate"]')
             generate.click()
-            time.sleep(2)
+            time.sleep(1)
 
             driver.switch_to.window(driver.window_handles[0])
 
@@ -119,7 +126,7 @@ if valasz == "i" or valasz == "n":
 
             start = driver.find_element(By.XPATH, '//*[@id="ccStart"]')
             start.click()
-            time.sleep(65)
+            varakozas()
 
             for j in range(ismetles):
                 driver.switch_to.window(driver.window_handles[0])
@@ -131,7 +138,7 @@ if valasz == "i" or valasz == "n":
                 time.sleep(0.5)
 
                 generate.click()
-                time.sleep(2)
+                time.sleep(1)
 
                 driver.switch_to.window(driver.window_handles[0])
 
@@ -139,7 +146,7 @@ if valasz == "i" or valasz == "n":
                 time.sleep(0.5)
 
                 start.click()
-                time.sleep(65)
+                varakozas()
 
             valid = driver.find_element(By.XPATH, '//*[@id="cc-tabs"]/ul/li[2]/a')
             valid.click()
