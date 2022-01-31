@@ -7,8 +7,6 @@ from colored import fg
 from dhooks import Webhook
 import time
 
-"""tim = time.localtime()
-current_time = time.strftime("%H:%M:%S", tim)"""
 zold=fg('green')
 # kérdések blokk
 PATH = "C:\Program Files (x86)\chromedriver.exe"
@@ -20,7 +18,7 @@ def varakozas():
     while True:
         val = driver.find_element(By.CSS_SELECTOR, '#codesForm').get_attribute("value")
         if val != '':
-            time.sleep(0.5)
+            time.sleep(0.05)
         else:
             break
 
@@ -93,7 +91,7 @@ if valasz == "i" or valasz == "n":
     driver.execute_script("window.open('');")
 
     driver.switch_to.window(driver.window_handles[1])
-    time.sleep(2)
+    time.sleep(0.75)
     driver.get(new_url)
     time.sleep(0.5)
 
@@ -116,7 +114,7 @@ if valasz == "i" or valasz == "n":
 
             generate = driver.find_element(By.XPATH, '//*[@id="generate"]')
             generate.click()
-            time.sleep(1)
+            time.sleep(0.5)
 
             driver.switch_to.window(driver.window_handles[0])
 
@@ -138,7 +136,7 @@ if valasz == "i" or valasz == "n":
                 time.sleep(0.5)
 
                 generate.click()
-                time.sleep(1)
+                time.sleep(0.5)
 
                 driver.switch_to.window(driver.window_handles[0])
 
@@ -150,11 +148,11 @@ if valasz == "i" or valasz == "n":
 
             valid = driver.find_element(By.XPATH, '//*[@id="cc-tabs"]/ul/li[2]/a')
             valid.click()
-            time.sleep(1)
+            time.sleep(0.5)
 
             blur = driver.find_element(By.XPATH, '//*[@id="blurCodes2"]')
             blur.click()
-            time.sleep(1)
+            time.sleep(0.5)
 
             validsz = driver.find_element(By.XPATH, '//*[@id="validData"]')
             used = driver.find_element(By.XPATH, '//*[@id="inactiveData"]')
